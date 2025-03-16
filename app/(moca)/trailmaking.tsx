@@ -108,7 +108,7 @@ export default function TrailMakingTest() {
           {
             text: "Continue",
             onPress: () => router.push({
-              pathname: "/(moca)/introduction",
+              pathname: "/(moca)/visuospatial_clock",
               params: { score: isCorrect ? 1 : 0 }
             })
           }

@@ -68,25 +68,30 @@ export default function MemoryTest() {
     }
   };
 
+  // Update the stopRecording function
   const stopRecording = async () => {
     try {
       await Voice.stop();
       setIsRecording(false);
+      // Make sure we have the latest responses
+      if (memoryData.actual_responses[currentTrial - 1].length > 0) {
+        setSpokenText(memoryData.actual_responses[currentTrial - 1].join(' '));
+      }
     } catch (error) {
       console.error('Failed to stop recording:', error);
     }
   };
 
-  // Update onSpeechResults handler
+  // Update onSpeechResults handler to keep spokenText updated
   const onSpeechResults = (e: SpeechResultsEvent) => {
     if (e.value) {
       const text = e.value[0].toLowerCase();
-      setSpokenText(text);
+      setSpokenText(text); // Keep this
       const words = text.split(' ').filter(word => word.length > 0);
       
       setMemoryData(prev => {
         const newResponses = [...prev.actual_responses];
-        const trialIndex = trialRef.current - 1; // Use ref instead of state
+        const trialIndex = trialRef.current - 1;
         
         if (trialIndex === 1) {
           console.log('Recording Trial 2:', words);
@@ -95,11 +100,6 @@ export default function MemoryTest() {
           console.log('Recording Trial 1:', words);
           newResponses[0] = words;
         }
-        
-        console.log('Updated memory state:', {
-          trial1: newResponses[0],
-          trial2: newResponses[1]
-        });
         
         return {
           ...prev,
@@ -142,7 +142,7 @@ export default function MemoryTest() {
       await AsyncStorage.setItem('@memory_data', JSON.stringify(memoryData));
       
       router.push({
-        pathname: "/(moca)/introduction",
+        pathname: "/(moca)/attention",
         params: { memoryData: JSON.stringify(memoryData) }
       });
     } catch (error) {
@@ -175,7 +175,9 @@ export default function MemoryTest() {
             </Text>
           </Pressable>
 
-          {spokenText && (
+        
+
+          {!isRecording  && (
             <Pressable
               style={[
                 styles.button,

@@ -96,25 +96,38 @@ export default function NamingTest() {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Test Complete</Text>
-        <Text style={styles.instruction}>
-          Your responses have been recorded
-        </Text>
-        <View style={styles.resultsContainer}>
-          {responses.map((response, index) => (
-            <Text key={index} style={styles.resultText}>
-              Image {index + 1}: {response}
-            </Text>
-          ))}
+        
+        <View style={styles.completionContainer}>
+          <Ionicons 
+            name="checkmark-circle" 
+            size={64} 
+            color={Colors.success} 
+          />
+          
+          <Text style={styles.instruction}>
+            Your responses have been recorded:
+          </Text>
+
+          <View style={styles.resultsContainer}>
+            {responses.map((response, index) => (
+              <View key={index} style={styles.responseItem}>
+                <Text style={styles.responseLabel}>Image {index + 1}:</Text>
+                <Text style={styles.responseText}>{response}</Text>
+              </View>
+            ))}
+          </View>
+
+          <Pressable
+            style={styles.nextButton}
+            onPress={() => router.push({
+              pathname: '/(moca)/memory',
+              params: { responses: JSON.stringify(responses) }
+            })}
+          >
+            <Text style={styles.nextButtonText}>Continue</Text>
+            <Ionicons name="arrow-forward" size={24} color={Colors.textLight} />
+          </Pressable>
         </View>
-        <Pressable
-          style={styles.nextButton}
-          onPress={() => router.push({
-            pathname: '/(moca)/introduction',
-            params: { responses: JSON.stringify(responses) }
-          })}
-        >
-          <Text style={[styles.buttonText, { color: Colors.white }]}>Continue</Text>
-        </Pressable>
       </View>
     );
   }
@@ -256,4 +269,54 @@ const styles = StyleSheet.create({
     color: Colors.text,
     marginLeft: 8,
   },
+  completionContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    gap: 24,
+  },
+  resultsContainer: {
+    width: '100%',
+    backgroundColor: Colors.card,
+    borderRadius: 12,
+    padding: 16,
+    gap: 12,
+  },
+  responseItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.border,
+  },
+  responseLabel: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: Colors.primary,
+    marginRight: 8,
+    width: 80,
+  },
+  responseText: {
+    fontSize: 16,
+    color: Colors.text,
+    flex: 1,
+  },
+  nextButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.primary,
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    borderRadius: 8,
+    width: '100%',
+    gap: 8,
+    marginTop: 20,
+  },
+  nextButtonText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: Colors.textLight,
+  }
 });
