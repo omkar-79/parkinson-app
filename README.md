@@ -31,6 +31,8 @@ cd parkinson-tracking-system
 
 2. Start the services using Docker Compose:
 ```sh
+cd backend
+docker-compose build
 docker-compose up -d
 ```
 
@@ -38,7 +40,6 @@ docker-compose up -d
 - Web Dashboard: http://localhost:3000
 - Backend API: http://localhost:8000
 - Database: localhost:5432
-- Nginx: http://localhost:80
 
 ### Development Setup
 
@@ -50,21 +51,7 @@ npm install
 npm run dev
 ```
 
-#### Backend API
 
-```sh
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload
-```
-
-#### Processing Service
-
-```sh
-cd processing
-pip install -r requirements.txt
-python server.py
-```
 
 ## Features
 
@@ -84,13 +71,11 @@ python server.py
   - JWT-based authentication
   - Role-based access control 
   - Encrypted data storage
-  - HIPAA compliance measures
 
 ## API Documentation
 
 The backend API documentation is available at:
 - Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
 
 ## Database Schema
 
@@ -98,7 +83,7 @@ The PostgreSQL database includes tables for:
 - Doctors
 - Patients
 - Test Records
-- Medical Data
+- Images
 
 ## Contributing
 
