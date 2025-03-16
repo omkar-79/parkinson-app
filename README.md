@@ -1,50 +1,118 @@
-# Welcome to your Expo app 👋
+# Parkinson's Tracking System
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A comprehensive medical tracking system for monitoring Parkinson's disease patients, featuring a web dashboard for doctors, real-time data processing, and secure data storage.
 
-## Get started
+## System Architecture
 
-1. Install dependencies
+The system consists of several microservices:
 
-   ```bash
-   npm install
-   ```
+- **Web Dashboard** ([`web_app`](web_app/)) - Next.js frontend for doctors
+- **Backend API** ([`backend`](backend/)) - FastAPI service handling authentication and data
+- **Processing Service** ([`processing`](processing/)) - ML-based analysis of patient data
+- **Database** ([`database`](database/)) - PostgreSQL database with medical records
+- **Nginx** ([`nginx`](nginx/)) - Reverse proxy for routing requests
 
-2. Start the app
+## Getting Started
 
-   ```bash
-    npx expo start
-   ```
+### Prerequisites
 
-In the output, you'll find options to open the app in a
+- Docker and Docker Compose
+- Node.js 19+ (for local development)
+- Python 3.9+ (for local development)
+- PostgreSQL 13+ (for local development)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Installation
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+1. Clone the repository:
+```sh
+git clone git@github.com:omkar-79/parkinson-app.git
+cd parkinson-tracking-system
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Start the services using Docker Compose:
+```sh
+docker-compose up -d
+```
 
-## Learn more
+3. The following services will be available:
+- Web Dashboard: http://localhost:3000
+- Backend API: http://localhost:8000
+- Database: localhost:5432
+- Nginx: http://localhost:80
 
-To learn more about developing your project with Expo, look at the following resources:
+### Development Setup
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+#### Web Dashboard
 
-## Join the community
+```sh
+cd web_app
+npm install
+npm run dev
+```
 
-Join our community of developers creating universal apps.
+#### Backend API
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```sh
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+#### Processing Service
+
+```sh
+cd processing
+pip install -r requirements.txt
+python server.py
+```
+
+## Features
+
+- **Doctor Dashboard**
+  - Patient management
+  - Real-time data visualization
+  - Test results tracking
+  - Secure authentication
+
+- **Patient Data Processing**
+  - Clock Drawing Test (CDT) analysis
+  - Speech processing
+  - Movement analysis
+  - Real-time scoring
+
+- **Security**
+  - JWT-based authentication
+  - Role-based access control 
+  - Encrypted data storage
+  - HIPAA compliance measures
+
+## API Documentation
+
+The backend API documentation is available at:
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
+
+## Database Schema
+
+The PostgreSQL database includes tables for:
+- Doctors
+- Patients
+- Test Records
+- Medical Data
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+Your Name - your.email@example.com
+Project Link: https://github.com/omkar-79/parkinson-app
