@@ -12,7 +12,6 @@ The system consists of several microservices:
 - **Backend API** ([`backend`](backend/)) - FastAPI service handling authentication and data
 - **Processing Service** ([`processing`](processing/)) - ML-based analysis of patient data
 - **Database** ([`database`](database/)) - PostgreSQL database with medical records
-- **Nginx** ([`nginx`](nginx/)) - Reverse proxy for routing requests
 
 ## Getting Started
 
@@ -27,7 +26,7 @@ The system consists of several microservices:
 
 1. Clone the repository:
 ```sh
-git clone git@github.com:omkar-79/parkinson-app.git
+git clone https://github.com/omkar-79/parkinson-app.git
 cd parkinson-tracking-system
 ```
 
@@ -69,15 +68,6 @@ npm run dev
   - Movement analysis
   - Real-time scoring
 
-- **Security**
-  - JWT-based authentication
-  - Role-based access control 
-  - Encrypted data storage
-
-## API Documentation
-
-The backend API documentation is available at:
-- Swagger UI: http://localhost:8000/docs
 
 ## Database Schema
 
@@ -87,19 +77,4 @@ The PostgreSQL database includes tables for:
 - Test Records
 - Images
 
-## Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contact
-
-Your Name - your.email@example.com
-Project Link: https://github.com/omkar-79/parkinson-app
